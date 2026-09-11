@@ -34,7 +34,9 @@ app.layout = [
             x='siglaPartido',
             y='id',
             histfunc='count',
-            category_orders={'siglaPartido': df['siglaPartido'].value_counts().index},
+            category_orders={
+                'siglaPartido': df['siglaPartido'].value_counts().index
+            },
             text_auto=True,
             labels={'siglaPartido': 'Partido'}
         )
