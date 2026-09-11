@@ -1,15 +1,20 @@
-from dash import Dash, html, dcc, callback, Output, Input
+from dash import Dash, html, dcc
 import plotly.express as px
 import pandas as pd
 import requests
 
-r = requests.get('https://dadosabertos.camara.leg.br/api/v2/deputados?ordem=ASC&ordenarPor=nome')
+r = requests.get(
+    'https://dadosabertos.camara.leg.br/api/v2/deputados?ordem=ASC&ordenarPor=nome'
+)
 df = pd.DataFrame(r.json()['dados'])
 
 app = Dash()
 
 app.layout = [
-    html.H1(children='Deputados Federais - Visão Geral', style={'textAlign':'center', 'font-family':'Arial'}),
+    html.H1(
+        children='Deputados Federais - Visão Geral',
+        style={'textAlign': 'center', 'font-family': 'Arial'}
+    ),
     dcc.Graph(
         figure=px.histogram(
             df,
@@ -19,7 +24,7 @@ app.layout = [
             histfunc='count',
             category_orders={'siglaUf': df['siglaUf'].value_counts().index},
             text_auto=True,
-            labels={'siglaUf':'UF'}
+            labels={'siglaUf': 'UF'}
         )
     ),
     dcc.Graph(
@@ -31,7 +36,7 @@ app.layout = [
             histfunc='count',
             category_orders={'siglaPartido': df['siglaPartido'].value_counts().index},
             text_auto=True,
-            labels={'siglaPartido':'Partido'}
+            labels={'siglaPartido': 'Partido'}
         )
     )
 ]
