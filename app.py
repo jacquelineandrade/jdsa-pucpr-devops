@@ -3,8 +3,12 @@ import plotly.express as px
 import pandas as pd
 import requests
 
+api_url = 'https://dadosabertos.camara.leg.br'
+api_endpoint = '/api/v2/deputados'
+api_args = '?ordem=ASC&ordenarPor=nome'
+
 r = requests.get(
-    'https://dadosabertos.camara.leg.br/api/v2/deputados?ordem=ASC&ordenarPor=nome'
+    f'{api_url}{api_endpoint}{api_args}'
 )
 df = pd.DataFrame(r.json()['dados'])
 
