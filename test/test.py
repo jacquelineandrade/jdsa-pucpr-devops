@@ -1,8 +1,3 @@
-# Ajustes do path para importar o src.app corretamente no Windows
-import sys
-from pathlib import Path
-sys.path.append(str(Path(__file__).resolve().parent.parent))
-
 import pytest
 import requests_mock
 from src.app import get_data
