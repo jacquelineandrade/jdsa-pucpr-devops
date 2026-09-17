@@ -7,17 +7,19 @@ API_URL = 'https://dadosabertos.camara.leg.br'
 API_ENDPOINT = '/api/v2/deputados'
 API_ARGS = '?ordem=ASC&ordenarPor=nome'
 
+
 def get_data(
-        api_url: str,
-        api_endpoint: str,
-        api_args: str
-    ) -> dict:
+    api_url: str,
+    api_endpoint: str,
+    api_args: str
+) -> dict:
     """Realiza a requisição dos dados na API e retorna uma dict."""
 
     r = requests.get(
         f'{api_url}{api_endpoint}{api_args}'
     )
     return r.json()
+
 
 base_data = get_data(API_URL, API_ENDPOINT, API_ARGS)
 df = pd.DataFrame(base_data['dados'])

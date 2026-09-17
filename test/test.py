@@ -33,13 +33,12 @@ def test_get_data_sucesso(requests_mock):
     }
 
     requests_mock.get(full_url, json=false_response, status_code=200)
-    
     results = get_data(
         'https://dadosabertos.camara.leg.br', 
         '/api/v2/deputados', 
         '?ordem=ASC&ordenarPor=nome'
     )
-    
+
     assert results == false_response
     assert results['dados'][0]['nome'] == 'Fulano da Silva'
     assert results['dados'][0]['siglaPartido'] == 'PT - Partido dos Testes'
