@@ -3,14 +3,24 @@ import plotly.express as px
 import pandas as pd
 import requests
 
-api_url = 'https://dadosabertos.camara.leg.br'
-api_endpoint = '/api/v2/deputados'
-api_args = '?ordem=ASC&ordenarPor=nome'
+API_URL = 'https://dadosabertos.camara.leg.br'
+API_ENDPOINT = '/api/v2/deputados'
+API_ARGS = '?ordem=ASC&ordenarPor=nome'
 
-r = requests.get(
-    f'{api_url}{api_endpoint}{api_args}'
-)
-df = pd.DataFrame(r.json()['dados'])
+def get_data(
+        api_url: str,
+        api_endpoint: str,
+        api_args: str
+    ) -> dict:
+    """Realiza a requisição dos dados na API e retorna uma dict."""
+
+    r = requests.get(
+        f'{api_url}{api_endpoint}{api_args}'
+    )
+    return r.json()
+
+base_data = get_data(API_URL, API_ENDPOINT, API_ARGS)
+df = pd.DataFrame(base_data['dados'])
 
 app = Dash()
 
